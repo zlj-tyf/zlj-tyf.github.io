@@ -354,6 +354,70 @@
             font-size: 1rem;
         }
         
+        /* 新增预约板块样式 */
+        .reservation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .reservation-card {
+            background: #fff8f0;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #e67e22;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .reservation-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .reservation-card h3 {
+            color: #d35400;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .reservation-card h3 i {
+            margin-right: 10px;
+            color: #e67e22;
+        }
+        
+        .reservation-card ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .reservation-card li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #f0e0d0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .reservation-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .reservation-card li i {
+            margin-right: 10px;
+            color: #e67e22;
+            min-width: 20px;
+        }
+        
+        .reservation-link {
+            color: #3498db;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .reservation-link:hover {
+            text-decoration: underline;
+        }
+        
         footer {
             text-align: center;
             padding: 30px 0;
@@ -363,7 +427,7 @@
         }
         
         @media (max-width: 768px) {
-            .transport-grid {
+            .transport-grid, .reservation-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -452,17 +516,55 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>7月24日 - <br/>7月26日</td>
+                            <td>7月24日 - 7月26日</td>
                             <td><span class="hotel-name">重庆崖栖酒店(解放碑七星岗店)</span></td>
                             <td><span class="metro-info">地铁1号线,10号线七星岗站</span></td>
                         </tr>
                         <tr>
-                            <td>7月26日 - <br/>7月28日</td>
+                            <td>7月26日 - 7月28日</td>
                             <td><span class="hotel-name">重庆观音桥华美达安可酒店</span></td>
                             <td><span class="metro-info">地铁3号线,6号线红旗河沟、黄泥磅站</span></td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        
+        <!-- 新增：大景点预约 Section -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-calendar-check"></i>
+                <h2>大景点预约</h2>
+            </div>
+            <div class="section-content">
+                <div class="reservation-grid">
+                    <div class="reservation-card">
+                        <h3><i class="fas fa-landmark"></i> 三峡博物馆</h3>
+                        <ul>
+                            <li><i class="fas fa-calendar-day"></i> 参观日期: 7月25日上午</li>
+                            <li><i class="fas fa-bell"></i> 预约时间: 7月19日</li>
+                            <li><i class="fas fa-link"></i> <a href="#小程序://重庆中国三峡博物馆微官网/k2KVrUxFZAyJbrr" class="reservation-link">小程序预约链接</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="reservation-card">
+                        <h3><i class="fas fa-monument"></i> 白公馆</h3>
+                        <ul>
+                            <li><i class="fas fa-calendar-day"></i> 参观日期: 7月26日上午</li>
+                            <li><i class="fas fa-bell"></i> 预约时间: 7月21日</li>
+                            <li><i class="fas fa-link"></i> <a href="#小程序://红岩博物馆/uLgjkjDABaSsrAE" class="reservation-link">小程序预约链接</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="reservation-card">
+                        <h3><i class="fas fa-tram"></i> 长江索道</h3>
+                        <ul>
+                            <li><i class="fas fa-calendar-day"></i> 参观日期: 7月24日下午</li>
+                            <li><i class="fas fa-bell"></i> 预约时间: 当天早上</li>
+                            <li><i class="fas fa-link"></i> <a href="#小程序://胖丁旅行/eKOkZWb41oF3QOE" class="reservation-link">小程序预约链接</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -516,6 +618,7 @@
                                         <div class="activity-details">
                                             <span class="detail-item"><i class="fas fa-ticket-alt"></i> 单程票30元/人</span>
                                             <span class="detail-item"><i class="fas fa-calendar-check"></i> 需提前预约</span>
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁2号线新华路站</span>
                                         </div>
                                     </div>
                                 </div>
@@ -594,6 +697,7 @@
                                         <div class="activity-details">
                                             <span class="detail-item"><i class="fas fa-ticket-alt"></i> 中高考生票98元/人</span>
                                             <span class="detail-item"><i class="fas fa-subway"></i> 地铁1号线转2号线大渡口站</span>
+                                            <span class="detail-item"><i class="fas fa-gamepad"></i> 娱乐体验项目</span>
                                         </div>
                                     </div>
                                 </div>
@@ -617,182 +721,181 @@
                     </div>
                     
                     <!-- Day 3 -->
-<div class="day-card">
-    <div class="day-header">
-        <div class="day-title">Day 3：白公馆+欢乐谷+磁器口夜游</div>
-        <div class="day-date">7月26日（周五）</div>
-    </div>
-    <div class="day-content">
-        <div class="time-section">
-            <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-title">退房，转至观音桥华美达安可酒店</div>
-                    <div class="activity-details">
-                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁1号线转3号线</span>
-                        <span class="detail-item"><i class="fas fa-ticket-alt"></i> 3元/人</span>
-                        <span class="detail-item"><i class="fas fa-hotel"></i> 七星岗→观音桥</span>
+                    <div class="day-card">
+                        <div class="day-header">
+                            <div class="day-title">Day 3：白公馆+欢乐谷+磁器口夜游</div>
+                            <div class="day-date">7月26日（周五）</div>
+                        </div>
+                        <div class="day-content">
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">退房，转至观音桥华美达安可酒店</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁1号线转3号线</span>
+                                            <span class="detail-item"><i class="fas fa-ticket-alt"></i> 3元/人</span>
+                                            <span class="detail-item"><i class="fas fa-hotel"></i> 七星岗→观音桥</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity">
+                                        <div class="activity-title">白公馆</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-landmark"></i> 免费</span>
+                                            <span class="detail-item"><i class="fas fa-calendar-check"></i> 需预约</span>
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁1号线烈士墓站+公交210路</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">欢乐谷</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-ticket-alt"></i> 联票168元/人</span>
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁6号线欢乐谷站</span>
+                                            <span class="detail-item"><i class="fas fa-ferris-wheel"></i> 主题乐园游玩</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-moon"></i> 晚上行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">磁器口古镇夜游</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-walking"></i> 免费</span>
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁6号线转1号线</span>
+                                            <span class="detail-item"><i class="fas fa-store"></i> 特色商铺与小吃</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cost-highlight">
+                                <div class="cost-item">
+                                    <div class="cost-label">交通费用</div>
+                                    <div class="cost-value">16元/人</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">门票费用</div>
+                                    <div class="cost-value">0元(联票)</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">总费用</div>
+                                    <div class="cost-value">16元/人</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="activity">
-                    <div class="activity-title">白公馆</div>
-                    <div class="activity-details">
-                        <span class="detail-item"><i class="fas fa-landmark"></i> 免费</span>
-                        <span class="detail-item"><i class="fas fa-calendar-check"></i> 需预约</span>
-                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁1号线烈士墓站+公交210路</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="time-section">
-            <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-title">欢乐谷</div>
-                    <div class="activity-details">
-                        <span class="detail-item"><i class="fas fa-ticket-alt"></i> 联票168元/人</span>
-                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁6号线欢乐谷站</span>
-                        <span class="detail-item"><i class="fas fa-clock"></i> 建议游玩4-6小时</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="time-section">
-            <h3 class="time-title"><i class="fas fa-moon"></i> 晚上行程</h3>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-title">磁器口古镇夜游</div>
-                    <div class="activity-details">
-                        <span class="detail-item"><i class="fas fa-walking"></i> 免费</span>
-                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁6号线转1号线</span>
-                        <span class="detail-item"><i class="fas fa-utensils"></i> 品尝特色小吃</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="cost-highlight">
-            <div class="cost-item">
-                <div class="cost-label">交通费用</div>
-                <div class="cost-value">16元/人</div>
-            </div>
-            <div class="cost-item">
-                <div class="cost-label">门票费用</div>
-                <div class="cost-value">0元(联票)</div>
-            </div>
-            <div class="cost-item">
-                <div class="cost-label">总费用</div>
-                <div class="cost-value">16元/人</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Day 4 -->
-<div class="day-card">
-    <div class="day-header">
-        <div class="day-title">Day 4：加勒比+玛雅海滩</div>
-        <div class="day-date">7月27日（周六）</div>
-    </div>
-    <div class="day-content">
-        <div class="time-section">
-            <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-title">自由活动</div>
-                    <div class="activity-details">
-                        <span class="detail-item"><i class="fas fa-coffee"></i> 酒店休息</span>
-                        <span class="detail-item"><i class="fas fa-utensils"></i> 早餐自理</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="time-section">
-            <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
-            <div class="activities">
-                                <div class="activity">
-                    <div class="activity-title">玛雅海滩水公园</div>
-                    <div class="activity-details">
-                        <span class="detail-item"><i class="fas fa-ticket-alt"></i> 联票已含</span>
-                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁环线转6号线欢乐谷站</span>
-                        <span class="detail-item"><i class="fas fa-umbrella-beach"></i> 大型水上游乐项目</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="cost-highlight">
-            <div class="cost-item">
-                <div class="cost-label">交通费用</div>
-                <div class="cost-value">10元/人</div>
-            </div>
-            <div class="cost-item">
-                <div class="cost-label">门票费用</div>
-                <div class="cost-value">168元/人</div>
-            </div>
-            <div class="cost-item">
-                <div class="cost-label">总费用</div>
-                <div class="cost-value">178元/人</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Day 5 -->
-<div class="day-card">
-    <div class="day-header">
-        <div class="day-title">Day 5：返程前室内展馆</div>
-        <div class="day-date">7月28日（周日）</div>
-    </div>
-    <div class="day-content">
-        <div class="time-section">
-            <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-title">重庆科技馆</div>
-                    <div class="activity-details">
-                        <span class="detail-item"><i class="fas fa-flask"></i> 免费</span>
-                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁6号线大剧院站</span>
-                        <span class="detail-item"><i class="fas fa-atom"></i> 科技互动体验</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="time-section">
-            <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
-            <div class="activities">
-                <div class="activity">
-                    <div class="activity-title">乘东航航班返沪</div>
-                    <div class="activity-details">
-                        <span class="detail-item"><i class="fas fa-plane"></i> 航班MU5432 15:20</span>
-                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁3号线转10号线</span>
-                        <span class="detail-item"><i class="fas fa-suitcase"></i> 建议提前2小时到机场</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="cost-highlight">
-            <div class="cost-item">
-                <div class="cost-label">交通费用</div>
-                <div class="cost-value">7元/人</div>
-            </div>
-            <div class="cost-item">
-                <div class="cost-label">门票费用</div>
-                <div class="cost-value">0元</div>
-            </div>
-            <div class="cost-item">
-                <div class="cost-label">总费用</div>
-                <div class="cost-value">7元/人</div>
-            </div>
-        </div>
-    </div>
-</div>
                     
+                    <!-- Day 4 -->
+                    <div class="day-card">
+                        <div class="day-header">
+                            <div class="day-title">Day 4：加勒比+玛雅海滩</div>
+                            <div class="day-date">7月27日（周六）</div>
+                        </div>
+                        <div class="day-content">
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">自由活动</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-coffee"></i> 酒店休息</span>
+                                            <span class="detail-item"><i class="fas fa-utensils"></i> 早餐自理</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">玛雅海滩水公园</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-ticket-alt"></i> 联票已含</span>
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁环线转6号线欢乐谷站</span>
+                                            <span class="detail-item"><i class="fas fa-swimmer"></i> 水上娱乐设施</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cost-highlight">
+                                <div class="cost-item">
+                                    <div class="cost-label">交通费用</div>
+                                    <div class="cost-value">10元/人</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">门票费用</div>
+                                    <div class="cost-value">231元/人</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">总费用</div>
+                                    <div class="cost-value">241元/人</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 5 -->
+                    <div class="day-card">
+                        <div class="day-header">
+                            <div class="day-title">Day 5：返程前室内展馆</div>
+                            <div class="day-date">7月28日（周日）</div>
+                        </div>
+                        <div class="day-content">
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">重庆科技馆</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-flask"></i> 免费</span>
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁6号线大剧院站</span>
+                                            <span class="detail-item"><i class="fas fa-microscope"></i> 科技互动展览</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">乘东航航班返沪</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-plane"></i> 航班MU5432 15:20</span>
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁3号线转10号线</span>
+                                            <span class="detail-item"><i class="fas fa-suitcase-rolling"></i> 建议提前2小时到机场</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cost-highlight">
+                                <div class="cost-item">
+                                    <div class="cost-label">交通费用</div>
+                                    <div class="cost-value">7元/人</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">门票费用</div>
+                                    <div class="cost-value">0元</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">总费用</div>
+                                    <div class="cost-value">7元/人</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -801,13 +904,13 @@
         <div class="summary">
             <div class="summary-card">
                 <i class="fas fa-wallet"></i>
-                <div class="summary-value">¥ 536</div>
+                <div class="summary-value">¥ 599</div>
                 <div class="summary-label">人均总费用</div>
             </div>
             
             <div class="summary-card">
                 <i class="fas fa-ticket-alt"></i>
-                <div class="summary-value">¥ 342</div>
+                <div class="summary-value">¥ 405</div>
                 <div class="summary-label">门票总费用</div>
             </div>
             
@@ -823,7 +926,6 @@
                 <div class="summary-label">酒店住宿</div>
             </div>
         </div>
-        
         <footer>
             <p>行程安排最后更新: 2024年7月20日 | 建议提前预约热门景点门票</p>
             <p>重庆天气提示: 7月平均气温28-35°C，请注意防晒和补充水分</p>
