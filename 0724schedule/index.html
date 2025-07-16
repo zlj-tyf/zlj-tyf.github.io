@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重庆行程安排 - 07.24~07.28</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            background: linear-gradient(120deg, #1a6dcc, #8e44ad);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,0 100,100" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .date-range {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            background: linear-gradient(120deg, #3498db, #9b59b6);
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .section-content {
+            padding: 25px 30px;
+        }
+        
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .transport-card {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .transport-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .transport-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .transport-card h3 i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        .transport-card ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .transport-card li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e0e0e0;
+            display: flex;
+        }
+        
+        .transport-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .transport-card li i {
+            margin-right: 10px;
+            color: #9b59b6;
+            min-width: 20px;
+        }
+        
+        .hotel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .hotel-table th {
+            background: #f1f8ff;
+            text-align: left;
+            padding: 15px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .hotel-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .hotel-table tr:nth-child(even) {
+            background-color: #f9f9ff;
+        }
+        
+        .hotel-table tr:hover {
+            background-color: #f0f5ff;
+        }
+        
+        .hotel-name {
+            font-weight: 600;
+            color: #2980b9;
+        }
+        
+        .metro-info {
+            color: #9b59b6;
+            font-weight: 500;
+        }
+        
+        .days-container {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .day-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .day-header {
+            background: linear-gradient(120deg, #2c3e50, #34495e);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .day-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .day-date {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .day-content {
+            padding: 0;
+        }
+        
+        .time-section {
+            padding: 25px 30px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .time-section:last-child {
+            border-bottom: none;
+        }
+        
+        .time-title {
+            font-size: 1.2rem;
+            color: #3498db;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .time-title i {
+            margin-right: 10px;
+        }
+        
+        .activities {
+            padding-left: 30px;
+        }
+        
+        .activity {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .activity::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #9b59b6;
+        }
+        
+        .activity-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .activity-details {
+            color: #666;
+            font-size: 0.95rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .detail-item {
+            background: #f0f7ff;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        
+        .cost-highlight {
+            background: #e8f4ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .cost-item {
+            text-align: center;
+            padding: 0 15px;
+        }
+        
+        .cost-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        
+        .cost-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        
+        .summary-card i {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .summary-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        
+        .summary-label {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .transport-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .day-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .cost-highlight {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-map-marked-alt"></i> 重庆行程安排</h1>
+            <div class="date-range">2024年7月24日 - 7月28日（周三至周日）</div>
+            <div class="tags">
+                <div class="tag"><i class="fas fa-mountain"></i> 山城探索</div>
+                <div class="tag"><i class="fas fa-utensils"></i> 美食体验</div>
+                <div class="tag"><i class="fas fa-swimming-pool"></i> 水上乐园</div>
+                <div class="tag"><i class="fas fa-landmark"></i> 文化景点</div>
+            </div>
+        </header>
+        
+        <!-- 大交通 Section -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-bus"></i>
+                <h2>大交通安排</h2>
+            </div>
+            <div class="section-content">
+                <div class="transport-grid">
+                    <div class="transport-card">
+                        <h3><i class="fas fa-subway"></i> 前往市区交通</h3>
+                        <ul>
+                            <li><i class="fas fa-route"></i> 铜梁 → 重庆市区</li>
+                            <li><i class="fas fa-bus"></i> 璧铜公交转地铁</li>
+                            <li><i class="fas fa-clock"></i> 约2小时</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="transport-card">
+                        <h3><i class="fas fa-plane-departure"></i> 航班信息</h3>
+                        <ul>
+                            <li><i class="fas fa-plane"></i> 航班号: MU5432</li>
+                            <li><i class="fas fa-calendar-alt"></i> 7月28日 15:20</li>
+                            <li><i class="fas fa-map-marker-alt"></i> 重庆江北国际机场 T3</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="transport-card">
+                        <h3><i class="fas fa-hotel"></i> 酒店到机场</h3>
+                        <ul>
+                            <li><i class="fas fa-subway"></i> 地铁: 50分钟</li>
+                            <li><i class="fas fa-taxi"></i> 打车: 23公里, 约25分钟</li>
+                            <li><i class="fas fa-money-bill-wave"></i> 建议提前2.5小时出发</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 住宿安排 Section -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-bed"></i>
+                <h2>住宿安排</h2>
+            </div>
+            <div class="section-content">
+                <table class="hotel-table">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>酒店名称</th>
+                            <th>地铁信息</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>7月24日 - 7月26日</td>
+                            <td><span class="hotel-name">重庆崖栖酒店(解放碑七星岗店)</span></td>
+                            <td><span class="metro-info">地铁1号线,10号线七星岗站</span></td>
+                        </tr>
+                        <tr>
+                            <td>7月26日 - 7月28日</td>
+                            <td><span class="hotel-name">重庆观音桥华美达安可酒店</span></td>
+                            <td><span class="metro-info">地铁3号线,6号线红旗河沟、黄泥磅站</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 行程安排 Section -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-calendar-day"></i>
+                <h2>每日行程安排</h2>
+            </div>
+            <div class="section-content">
+                <div class="days-container">
+                    <!-- Day 1 -->
+                    <div class="day-card">
+                        <div class="day-header">
+                            <div class="day-title">Day 1：铜梁→重庆，解放碑核心区</div>
+                            <div class="day-date">7月24日（周三）</div>
+                        </div>
+                        <div class="day-content">
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">铜梁虎峰镇至重庆</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-bus"></i> 大巴约2小时</span>
+                                            <span class="detail-item"><i class="fas fa-ticket-alt"></i> 50元/人</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">解放碑+八一好吃街</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-walking"></i> 免费步行</span>
+                                            <span class="detail-item"><i class="fas fa-utensils"></i> 重庆美食</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity">
+                                        <div class="activity-title">山城步道</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-hiking"></i> 免费步行</span>
+                                            <span class="detail-item"><i class="fas fa-mountain"></i> 体验山城特色</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity">
+                                        <div class="activity-title">长江索道</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-ticket-alt"></i> 单程票30元/人</span>
+                                            <span class="detail-item"><i class="fas fa-calendar-check"></i> 需提前预约</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-moon"></i> 晚上行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">洪崖洞夜景</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-lightbulb"></i> 18:00后灯光</span>
+                                            <span class="detail-item"><i class="fas fa-camera"></i> 免费拍照打卡</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity">
+                                        <div class="activity-title">千厮门大桥</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-bridge"></i> 免费步行</span>
+                                            <span class="detail-item"><i class="fas fa-city"></i> 欣赏两岸夜景</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cost-highlight">
+                                <div class="cost-item">
+                                    <div class="cost-label">交通费用</div>
+                                    <div class="cost-value">52元/人</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">门票费用</div>
+                                    <div class="cost-value">30元/人</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">总费用</div>
+                                    <div class="cost-value">82元/人</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 2 -->
+                    <div class="day-card">
+                        <div class="day-header">
+                            <div class="day-title">Day 2：历史人文+心跳顽家</div>
+                            <div class="day-date">7月25日（周四）</div>
+                        </div>
+                        <div class="day-content">
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">三峡博物馆</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-landmark"></i> 免费</span>
+                                            <span class="detail-item"><i class="fas fa-calendar-check"></i> 需预约</span>
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁2号线曾家岩站</span>
+                                        </div>
+                                    </div>
+                                    <div class="activity">
+                                        <div class="activity-title">人民大礼堂</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-ticket-alt"></i> 门票4元/人</span>
+                                            <span class="detail-item"><i class="fas fa-walking"></i> 步行10分钟</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="time-section">
+                                <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
+                                <div class="activities">
+                                    <div class="activity">
+                                        <div class="activity-title">心跳顽家</div>
+                                        <div class="activity-details">
+                                            <span class="detail-item"><i class="fas fa-ticket-alt"></i> 中高考生票98元/人</span>
+                                            <span class="detail-item"><i class="fas fa-subway"></i> 地铁1号线转2号线大渡口站</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cost-highlight">
+                                <div class="cost-item">
+                                    <div class="cost-label">交通费用</div>
+                                    <div class="cost-value">8元/人</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">门票费用</div>
+                                    <div class="cost-value">102元/人</div>
+                                </div>
+                                <div class="cost-item">
+                                    <div class="cost-label">总费用</div>
+                                    <div class="cost-value">110元/人</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 3 -->
+<div class="day-card">
+    <div class="day-header">
+        <div class="day-title">Day 3：白公馆+欢乐谷+磁器口夜游</div>
+        <div class="day-date">7月26日（周五）</div>
+    </div>
+    <div class="day-content">
+        <div class="time-section">
+            <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-title">退房，转至观音桥华美达安可酒店</div>
+                    <div class="activity-details">
+                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁1号线转3号线</span>
+                        <span class="detail-item"><i class="fas fa-ticket-alt"></i> 3元/人</span>
+                        <span class="detail-item"><i class="fas fa-hotel"></i> 七星岗→观音桥</span>
+                    </div>
+                </div>
+                <div class="activity">
+                    <div class="activity-title">白公馆</div>
+                    <div class="activity-details">
+                        <span class="detail-item"><i class="fas fa-landmark"></i> 免费</span>
+                        <span class="detail-item"><i class="fas fa-calendar-check"></i> 需预约</span>
+                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁1号线烈士墓站+公交210路</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="time-section">
+            <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-title">欢乐谷</div>
+                    <div class="activity-details">
+                        <span class="detail-item"><i class="fas fa-ticket-alt"></i> 联票168元/人</span>
+                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁6号线欢乐谷站</span>
+                        <span class="detail-item"><i class="fas fa-clock"></i> 建议游玩4-6小时</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="time-section">
+            <h3 class="time-title"><i class="fas fa-moon"></i> 晚上行程</h3>
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-title">磁器口古镇夜游</div>
+                    <div class="activity-details">
+                        <span class="detail-item"><i class="fas fa-walking"></i> 免费</span>
+                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁6号线转1号线</span>
+                        <span class="detail-item"><i class="fas fa-utensils"></i> 品尝特色小吃</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cost-highlight">
+            <div class="cost-item">
+                <div class="cost-label">交通费用</div>
+                <div class="cost-value">16元/人</div>
+            </div>
+            <div class="cost-item">
+                <div class="cost-label">门票费用</div>
+                <div class="cost-value">0元(联票)</div>
+            </div>
+            <div class="cost-item">
+                <div class="cost-label">总费用</div>
+                <div class="cost-value">16元/人</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Day 4 -->
+<div class="day-card">
+    <div class="day-header">
+        <div class="day-title">Day 4：加勒比+玛雅海滩</div>
+        <div class="day-date">7月27日（周六）</div>
+    </div>
+    <div class="day-content">
+        <div class="time-section">
+            <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-title">自由活动</div>
+                    <div class="activity-details">
+                        <span class="detail-item"><i class="fas fa-coffee"></i> 酒店休息</span>
+                        <span class="detail-item"><i class="fas fa-utensils"></i> 早餐自理</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="time-section">
+            <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-title">海昌加勒比水公园</div>
+                    <div class="activity-details">
+                        <span class="detail-item"><i class="fas fa-ticket-alt"></i> 中高考生票63元/人</span>
+                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁环线海棠溪站</span>
+                        <span class="detail-item"><i class="fas fa-swimming-pool"></i> 水上娱乐设施</span>
+                    </div>
+                </div>
+                <div class="activity">
+                    <div class="activity-title">玛雅海滩水公园</div>
+                    <div class="activity-details">
+                        <span class="detail-item"><i class="fas fa-ticket-alt"></i> 联票已含</span>
+                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁环线转6号线欢乐谷站</span>
+                        <span class="detail-item"><i class="fas fa-umbrella-beach"></i> 大型水上游乐项目</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cost-highlight">
+            <div class="cost-item">
+                <div class="cost-label">交通费用</div>
+                <div class="cost-value">10元/人</div>
+            </div>
+            <div class="cost-item">
+                <div class="cost-label">门票费用</div>
+                <div class="cost-value">231元/人</div>
+            </div>
+            <div class="cost-item">
+                <div class="cost-label">总费用</div>
+                <div class="cost-value">241元/人</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Day 5 -->
+<div class="day-card">
+    <div class="day-header">
+        <div class="day-title">Day 5：返程前室内展馆</div>
+        <div class="day-date">7月28日（周日）</div>
+    </div>
+    <div class="day-content">
+        <div class="time-section">
+            <h3 class="time-title"><i class="fas fa-sun"></i> 上午行程</h3>
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-title">重庆科技馆</div>
+                    <div class="activity-details">
+                        <span class="detail-item"><i class="fas fa-flask"></i> 免费</span>
+                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁6号线大剧院站</span>
+                        <span class="detail-item"><i class="fas fa-atom"></i> 科技互动体验</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="time-section">
+            <h3 class="time-title"><i class="fas fa-cloud-sun"></i> 下午行程</h3>
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-title">乘东航航班返沪</div>
+                    <div class="activity-details">
+                        <span class="detail-item"><i class="fas fa-plane"></i> 航班MU5432 15:20</span>
+                        <span class="detail-item"><i class="fas fa-subway"></i> 地铁3号线转10号线</span>
+                        <span class="detail-item"><i class="fas fa-suitcase"></i> 建议提前2小时到机场</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cost-highlight">
+            <div class="cost-item">
+                <div class="cost-label">交通费用</div>
+                <div class="cost-value">7元/人</div>
+            </div>
+            <div class="cost-item">
+                <div class="cost-label">门票费用</div>
+                <div class="cost-value">0元</div>
+            </div>
+            <div class="cost-item">
+                <div class="cost-label">总费用</div>
+                <div class="cost-value">7元/人</div>
+            </div>
+        </div>
+    </div>
+</div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- 费用摘要 -->
+        <div class="summary">
+            <div class="summary-card">
+                <i class="fas fa-wallet"></i>
+                <div class="summary-value">¥ 599</div>
+                <div class="summary-label">人均总费用</div>
+            </div>
+            
+            <div class="summary-card">
+                <i class="fas fa-ticket-alt"></i>
+                <div class="summary-value">¥ 405</div>
+                <div class="summary-label">门票总费用</div>
+            </div>
+            
+            <div class="summary-card">
+                <i class="fas fa-subway"></i>
+                <div class="summary-value">¥ 93</div>
+                <div class="summary-label">交通总费用</div>
+            </div>
+            
+            <div class="summary-card">
+                <i class="fas fa-hotel"></i>
+                <div class="summary-value">4晚</div>
+                <div class="summary-label">酒店住宿</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>行程安排最后更新: 2024年7月20日 | 建议提前预约热门景点门票</p>
+            <p>重庆天气提示: 7月平均气温28-35°C，请注意防晒和补充水分</p>
+        </footer>
+    </div>
+</body>
+</html>
