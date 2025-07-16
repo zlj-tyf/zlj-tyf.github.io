@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0169)file:///Users/LijieZhou/Development/zlj-tyf.github.io/0724schedule/index.html#%E5%B0%8F%E7%A8%8B%E5%BA%8F://%E7%BA%A2%E5%B2%A9%E5%8D%9A%E7%89%A9%E9%A6%86/uLgjkjDABaSsrAE -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>重庆行程安排 - 07.24~07.28</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        function copyCode(btn) {
+            const codeBlock = btn.parentElement.textContent.replace('📋', '').trim();
+            navigator.clipboard.writeText(codeBlock)
+                .then(() => btn.textContent = '✓ 已复制')
+                .catch(err => console.error('复制失败:', err));
+            
+            setTimeout(() => btn.textContent = '📋', 2000);
+        }
+    </script>
     <style>
         * {
             margin: 0;
@@ -12,7 +22,17 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
-        
+        .copy-btn { 
+            position: absolute; 
+            right: 10px; 
+            top: 10px;
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             color: #333;
@@ -543,7 +563,7 @@
                         <ul>
                             <li><i class="fas fa-calendar-day"></i> 参观日期: 7月25日上午</li>
                             <li><i class="fas fa-bell"></i> 预约时间: 7月19日</li>
-                            <li><i class="fas fa-link"></i> <a href="#小程序://重庆中国三峡博物馆微官网/k2KVrUxFZAyJbrr" class="reservation-link">小程序预约链接</a></li>
+                            <li><i class="fas fa-link"></i><code>#小程序://重庆中国三峡博物馆微官网/k2KVrUxFZAyJbrr<button class="copy-btn" onclick="copyCode(this)">📋</button></code></li>
                         </ul>
                     </div>
                     
@@ -552,7 +572,7 @@
                         <ul>
                             <li><i class="fas fa-calendar-day"></i> 参观日期: 7月26日上午</li>
                             <li><i class="fas fa-bell"></i> 预约时间: 7月21日</li>
-                            <li><i class="fas fa-link"></i> <a href="#小程序://红岩博物馆/uLgjkjDABaSsrAE" class="reservation-link">小程序预约链接</a></li>
+                            <li><i class="fas fa-link"></i><code>#小程序://红岩博物馆/uLgjkjDABaSsrAE<button class="copy-btn" onclick="copyCode(this)">📋</button></code></li>
                         </ul>
                     </div>
                     
@@ -561,7 +581,7 @@
                         <ul>
                             <li><i class="fas fa-calendar-day"></i> 参观日期: 7月24日下午</li>
                             <li><i class="fas fa-bell"></i> 预约时间: 当天早上</li>
-                            <li><i class="fas fa-link"></i> <a href="#小程序://胖丁旅行/eKOkZWb41oF3QOE" class="reservation-link">小程序预约链接</a></li>
+                            <li><i class="fas fa-link"></i><code>#小程序://胖丁旅行/eKOkZWb41oF3QOE<button class="copy-btn" onclick="copyCode(this)">📋</button></code></li>
                         </ul>
                     </div>
                 </div>
@@ -699,6 +719,8 @@
                                             <span class="detail-item"><i class="fas fa-subway"></i> 地铁1号线转2号线大渡口站</span>
                                             <span class="detail-item"><i class="fas fa-gamepad"></i> 娱乐体验项目</span>
                                         </div>
+<br><span class="detail-item"><i class="fas fa-qrcode"></i> ZLJ 取票二维码</span><br><br><img src="./qr.png" width="100/"><br>
+
                                     </div>
                                 </div>
                             </div>
@@ -931,5 +953,6 @@
             <p>重庆天气提示: 7月平均气温28-35°C，请注意防晒和补充水分</p>
         </footer>
     </div>
-</body>
-</html>
+
+
+</body></html>

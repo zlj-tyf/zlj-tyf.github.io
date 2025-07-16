@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>重庆行程安排</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 0 20px; }
+        h1 { color: #e74c3c; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h2 { color: #3498db; margin-top: 30px; }
+        pre { background: #f8f9fa; padding: 15px; border-radius: 8px; position: relative; }
+        .copy-btn { 
+            position: absolute; 
+            right: 10px; 
+            top: 10px;
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .qrcode { width: 223px; height: 223px; margin: 10px 0; border: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>🗓 07.24~07.28 行程安排</h1>
+
+    <!-- 大交通 -->
+    <section>
+        <h2>🚌 大交通</h2>
+        <pre><code>1. 铜梁 -> 重庆市区：璧铜公交转地铁，约 2h
+2. 航班信息：MU5432 15:20重庆江北T3
+3. 酒店 -> 机场：地铁 50min；打车 23km 25min<button class="copy-btn" onclick="copyCode(this)">📋</button></code></pre>
+    </section>
+
+    <!-- 住宿 -->
+    <section>
+        <h2>🏨 住宿</h2>
+        <pre><code>1. 7/24~7/26 **重庆崖栖酒店(解放碑七星岗店)** 地铁1#，10#七星岗站
+2. 7/26~7/28 **重庆观音桥华美达安可酒店** 地铁3#，6#红旗河沟、黄泥磅站<button class="copy-btn" onclick="copyCode(this)">📋</button></code></pre>
+    </section>
+
+    <!-- 心跳顽家 -->
+    <section>
+        <h2>🎢 心跳顽家</h2>
+        <img src="此处替换为二维码图片链接" alt="心跳顽家取票二维码" class="qrcode">
+        <pre><code>中高考生票98元/人，地铁1号线转2号线至大渡口站：5元/人<button class="copy-btn" onclick="copyCode(this)">📋</button></code></pre>
+    </section>
+
+    <!-- 其他部分代码结构类似，此处省略... -->
+
+    <script>
+        function copyCode(btn) {
+            const codeBlock = btn.parentElement.textContent.replace('📋', '').trim();
+            navigator.clipboard.writeText(codeBlock)
+                .then(() => btn.textContent = '✓ 已复制')
+                .catch(err => console.error('复制失败:', err));
+            
+            setTimeout(() => btn.textContent = '📋', 2000);
+        }
+    </script>
+</body>
+</html>
