@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'SF Mono', 'Segoe UI Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+            line-height: 1.6;
+            color: #f8f8f2;
+            background-color: #272822;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #f8f8f2;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 2.2em;
+            border-bottom: 2px solid #66d9ef;
+            padding-bottom: 10px;
+            color: #a6e22e;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            border-left: 4px solid #66d9ef;
+            padding-left: 15px;
+            margin-top: 30px;
+            background-color: #3e3d32;
+            padding: 10px 15px;
+            color: #f92672;
+        }
+        
+        h3 {
+            font-size: 1.4em;
+            color: #fd971f;
+        }
+        
+        code {
+            font-family: 'SF Mono', monospace;
+            background-color: #3e3d32;
+            border-radius: 3px;
+            padding: 2px 4px;
+            color: #f8f8f2;
+        }
+        
+        pre {
+            font-family: 'SF Mono', monospace;
+            padding: 12px;
+            overflow-x: auto;
+            background-color: #1e1e1e;
+            border-radius: 4px;
+            border-left: 4px solid #66d9ef;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        /* Monokai 语法高亮 */
+        .hljs-keyword { color: #f92672; }
+        .hljs-built_in { color: #66d9ef; }
+        .hljs-string { color: #e6db74; }
+        .hljs-comment { color: #75715e; }
+        .hljs-title { color: #a6e22e; }
+        .hljs-params { color: #fd971f; }
+        .hljs-number { color: #ae81ff; }
+        
+        blockquote {
+            border-left: 4px solid #66d9ef;
+            padding: 10px 20px;
+            margin: 0 0 20px;
+            background-color: #3e3d32;
+            color: #f8f8f2;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #3e3d32;
+        }
+        
+        th {
+            background-color: #f92672;
+            color: #f8f8f2;
+            font-weight: 600;
+        }
+        
+        tr {
+            background-color: #2a2a24;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #3e3d32;
+        }
+        
+        tr:hover {
+            background-color: #49483e;
+        }
+        
+        .note {
+            background-color: #3b3d34;
+            border-left: 4px solid #66d9ef;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .warning {
+            background-color: #3e2d2c;
+            border-left: 4px solid #f92672;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .success {
+            background-color: #2d3e2d;
+            border-left: 4px solid #a6e22e;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #66d9ef, transparent);
+            margin: 30px 0;
+            border: none;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 7px;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1;
+            color: #272822;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            border-radius: 10px;
+            margin-right: 5px;
+        }
+        
+        .badge-blue {
+            background-color: #66d9ef;
+        }
+        
+        .badge-green {
+            background-color: #a6e22e;
+        }
+        
+        .badge-orange {
+            background-color: #fd971f;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+        
+        a {
+            color: #66d9ef;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+            color: #a6e22e;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f92672;
+            color: #f8f8f2;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: #ff5995;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1><span class="emoji">🛠</span> 智能竞赛跟踪系统部署与使用说明</h1>
+
+<div class="note">
+    <strong>项目概述：</strong> 本项目为课题辅导机构设计，支持学生、教师、管理员三种角色，提供课题填报、节点控制、资料反馈与版本管理等核心功能。
+</div>
+
+<h2><span class="emoji">📦</span> 技术栈</h2>
+
+<ul>
+    <li><strong>后端：</strong> Node.js + Express + Sequelize + PostgreSQL</li>
+    <li><strong>前端：</strong> React + Vite + Tailwind CSS</li>
+    <li><strong>数据管理：</strong> Git + JSONB 字段 + Sequelize ORM</li>
+    <li><strong>环境：</strong> Ubuntu 22.04（本地部署）</li>
+</ul>
+
+<hr class="divider">
+
+<h2><span class="emoji">🚀</span> 环境配置步骤</h2>
+
+<h3><span class="badge badge-blue">1</span> 安装依赖环境（只需一次）</h3>
+
+<pre><code class="language-bash">sudo apt update && sudo apt upgrade -y
+
+# Git
+sudo apt install -y git
+
+# Node.js LTS
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# PostgreSQL
+sudo apt install -y postgresql postgresql-contrib
+
+# 可选：前端打包工具
+sudo npm install -g vite nodemon</code></pre>
+
+<h3><span class="badge badge-blue">2</span> 配置数据库</h3>
+
+<pre><code class="language-bash"># 切换至 postgres 用户
+sudo -u postgres createuser project_user --interactive  # 输入 no/no
+sudo -u postgres createdb project_db -O project_user</code></pre>
+
+<p>或者使用 PostgreSQL CLI 登录创建：</p>
+
+<pre><code class="language-sql">sudo -u postgres psql
+postgres=# CREATE USER project_user WITH PASSWORD 'your_password';
+postgres=# CREATE DATABASE project_db OWNER project_user;
+\q</code></pre>
+
+<h3><span class="badge badge-blue">3</span> 下载项目并解压</h3>
+
+<pre><code class="language-bash">unzip project-platform.zip
+cd project-platform</code></pre>
+
+<p>项目结构：</p>
+
+<pre><code class="language-plaintext">project-platform/
+├── backend/        # 后端 Express API
+├── frontend/       # 前端 React 应用
+├── requirements.txt</code></pre>
+
+<hr class="divider">
+
+<h2><span class="emoji">⚙️</span> 后端部署指南</h2>
+
+<h3><span class="badge badge-green">1</span> 安装依赖</h3>
+
+<pre><code class="language-bash">cd backend
+npm install</code></pre>
+
+<h3><span class="badge badge-green">2</span> 配置环境变量</h3>
+
+<p>编辑 <code>.env</code> 文件：</p>
+
+<pre><code class="language-env">PORT=4000
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=project_db
+DB_USER=project_user
+DB_PASS=your_password
+JWT_SECRET=超强密钥</code></pre>
+
+<h3><span class="badge badge-green">3</span> 启动开发服务器</h3>
+
+<pre><code class="language-bash">npm run dev</code></pre>
+
+<p>默认监听：<code>http://localhost:4000/api/</code></p>
+
+<hr class="divider">
+
+<h2><span class="emoji">💻</span> 前端部署指南</h2>
+
+<h3><span class="badge badge-orange">1</span> 安装依赖</h3>
+
+<pre><code class="language-bash">cd frontend
+npm install</code></pre>
+
+<h3><span class="badge badge-orange">2</span> 启动前端开发服务器</h3>
+
+<pre><code class="language-bash">npm run dev</code></pre>
+
+<p>默认浏览地址：<a href="http://localhost:5173" target="_blank">http://localhost:5173</a></p>
+
+<hr class="divider">
+
+<h2><span class="emoji">👤</span> 用户创建与角色说明</h2>
+
+<h3>默认数据库无用户，需手动插入初始管理员：</h3>
+
+<pre><code class="language-sql">-- 登录数据库
+sudo -u postgres psql project_db
+
+-- 示例：添加一个管理员账户
+INSERT INTO "Users" (id, name, email, "passwordHash", role, createdAt, updatedAt)
+VALUES (
+  gen_random_uuid(), 'Admin', 'admin@example.com',
+  crypt('admin123', gen_salt('bf')),
+  'admin', now(), now()
+);</code></pre>
+
+<div class="warning">
+    <strong>注意：</strong> 密码需手动加密（可使用 <code>bcrypt</code> 工具预先生成）。
+</div>
+
+<h3><span class="emoji">🧑‍🏫</span> 三种角色权限说明</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>功能 / 角色</th>
+            <th>学生 Student</th>
+            <th>教师 Teacher</th>
+            <th>管理员 Admin</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>选择课题项目</td>
+            <td>✅</td>
+            <td></td>
+            <td>✅（创建配置）</td>
+        </tr>
+        <tr>
+            <td>填写项目材料</td>
+            <td>✅</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>查看提交状态</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+        </tr>
+        <tr>
+            <td>修改提交材料</td>
+            <td>提交后不能修改</td>
+            <td>✅（反馈修改）</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>用户管理</td>
+            <td></td>
+            <td></td>
+            <td>✅（创建/删除用户）</td>
+        </tr>
+        <tr>
+            <td>导出所有数据</td>
+            <td></td>
+            <td></td>
+            <td>✅（Excel/JSON 可选）</td>
+        </tr>
+        <tr>
+            <td>时间节点配置</td>
+            <td></td>
+            <td></td>
+            <td>✅（控制截止时间）</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr class="divider">
+
+<h2><span class="emoji">🧪</span> 功能测试建议</h2>
+
+<ol>
+    <li>启动后端与前端</li>
+    <li>用管理员邮箱密码登录</li>
+    <li>进入管理员界面（默认跳转 <code>/admin</code>），添加比赛项目</li>
+    <li>使用新邮箱注册学生账号，选择比赛并提交</li>
+    <li>教师登录查看并反馈</li>
+    <li>管理员导出数据</li>
+</ol>
+
+<hr class="divider">
+
+<h2><span class="emoji">📁</span> 数据版本控制说明</h2>
+
+<ul>
+    <li>所有学生提交记录保存在 <code>Submission</code> 表中</li>
+    <li>每次提交生成一个新版本，保存在 <code>Version</code> 表中</li>
+    <li>所有版本按时间戳存储，可回溯</li>
+    <li>项目字段以 JSON 格式配置，灵活应对不同比赛要求</li>
+    <li>若需要与 GitHub 联动，可定期将数据库导出为 JSON 并提交</li>
+</ul>
+
+<hr class="divider">
+
+<h2><span class="emoji">🧹</span> 常见问题与维护</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>问题</th>
+            <th>解决方案</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>登录报错 Unauthorized</td>
+            <td>确认用户存在，token 有效</td>
+        </tr>
+        <tr>
+            <td>无法连接数据库</td>
+            <td>检查 <code>.env</code> 配置 & PostgreSQL 状态</td>
+        </tr>
+        <tr>
+            <td>端口冲突</td>
+            <td>更改 <code>.env</code> 中 PORT 或 Vite 配置</td>
+        </tr>
+        <tr>
+            <td>前端无法访问后端</td>
+            <td>配置代理或使用相对路径</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr class="divider">
+
+<h2><span class="emoji">📤</span> 项目导出与部署建议</h2>
+
+<ul>
+    <li>生产环境建议使用 nginx + pm2</li>
+    <li>数据库建议定期备份（<code>pg_dump</code>）</li>
+    <li>可考虑部署至学校内网或教育云</li>
+</ul>
+
+<div class="note">
+    <strong>扩展说明：</strong> 如需扩展功能（如消息通知、Excel 模板导入导出、AI 反馈生成等），建议按模块划分控制器并增加测试。
+</div>
+
+<hr class="divider">
+
+<div class="success">
+    <strong>扩展功能已开发完成！</strong> 你可以点击以下链接下载扩展功能压缩包：
+    <br><br>
+    <a href="sandbox:/mnt/data/project-platform-extensions.zip" class="btn">点击下载扩展功能压缩包</a>
+</div>
+
+<h2><span class="emoji">✨</span> 扩展功能说明</h2>
+
+<h3><span class="badge badge-blue">1</span> 消息通知功能</h3>
+
+<p><strong>路径：</strong> <code>notifications/email_notifier.py</code></p>
+
+<h4>用法：</h4>
+
+<pre><code class="language-python">from notifications.email_notifier import send_email
+
+send_email(
+    subject="材料提交成功通知",
+    body="你已成功提交课题申报材料，请等待导师反馈。",
+    to_email="student@example.com"
+)</code></pre>
+
+<div class="warning">
+    <strong>注意：</strong>
+    <ul>
+        <li>默认使用本地 SMTP（确保 <code>localhost:25</code> 可用）</li>
+        <li>可改为第三方 SMTP（如 Gmail、腾讯企业邮箱），需配置登录信息</li>
+    </ul>
+</div>
+
+<h3><span class="badge badge-blue">2</span> Excel 导入导出</h3>
+
+<p><strong>路径：</strong> <code>excel_utils/import_export.py</code></p>
+
+<h4>导出数据到 Excel：</h4>
+
+<pre><code class="language-python">from excel_utils.import_export import export_to_excel
+response = export_to_excel(StudentSubmission.objects.all())
+return response  # 在 Django 视图中使用</code></pre>
+
+<h4>从 Excel 导入数据：</h4>
+
+<pre><code class="language-python">from excel_utils.import_export import import_from_excel
+records = import_from_excel(uploaded_file)  # `uploaded_file` 是 request.FILES 中的 Excel 文件</code></pre>
+
+<div class="note">
+    <strong>依赖：</strong>
+    <ul>
+        <li>pandas</li>
+        <li>openpyxl</li>
+    </ul>
+</div>
+
+<h3><span class="badge badge-blue">3</span> AI 自动反馈生成</h3>
+
+<p><strong>路径：</strong> <code>ai_feedback/generate_feedback.py</code></p>
+
+<h4>用法：</h4>
+
+<pre><code class="language-python">from ai_feedback.generate_feedback import generate_feedback
+
+text = "我的课题名称是《XXX》，研究目标是……"
+api_key = "你的 OpenAI API Key"
+
+feedback = generate_feedback(text, api_key)
+print(feedback)</code></pre>
+
+<div class="warning">
+    <strong>请替换为你的 OpenAI API 密钥。</strong>
+</div>
+
+<h3>安装扩展依赖：</h3>
+
+<pre><code class="language-bash">pip install -r requirements-extensions.txt</code></pre>
+
+<h3>示例集成点：</h3>
+
+<p>你可以在学生材料提交后：</p>
+
+<ul>
+    <li>自动调用 <code>generate_feedback</code> 生成修改建议</li>
+    <li>发送通知 <code>send_email</code></li>
+    <li>或导出数据 <code>export_to_excel</code> 给线下团队分析</li>
+</ul>
+
+<hr class="divider">
+
+<h2><span class="emoji">🐳</span> Docker 化部署指南</h2>
+
+<h3><span class="badge badge-green">1</span> 创建 <code>Dockerfile</code></h3>
+
+<pre><code class="language-dockerfile">FROM python:3.11-slim
+
+WORKDIR /app
+COPY . /app
+
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]</code></pre>
+
+<h3><span class="badge badge-green">2</span> 创建 <code>docker-compose.yml</code></h3>
+
+<pre><code class="language-yaml">version: "3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1</code></pre>
+
+<h3><span class="badge badge-green">3</span> 启动服务</h3>
+
+<pre><code class="language-bash">docker-compose up --build</code></pre>
+
+<h3><span class="badge badge-green">4</span> 访问服务</h3>
+
+<p>浏览器打开：<a href="http://localhost:8000" target="_blank">http://localhost:8000/</a></p>
+
+<hr class="divider">
+
+<h2><span class="emoji">👥</span> 用户创建指南</h2>
+
+<h3>管理员用户</h3>
+
+<pre><code class="language-bash">python manage.py createsuperuser</code></pre>
+
+<h3>学生用户注册（UI 中注册）</h3>
+
+<ol>
+    <li>打开前端界面</li>
+    <li>点击"注册"</li>
+    <li>选择"学生"身份并填写基本信息</li>
+</ol>
+
+<h3>教师用户由管理员创建：</h3>
+
+<p>管理员登录后台：<a href="http://127.0.0.1:8000/admin" target="_blank">http://127.0.0.1:8000/admin</a></p>
+
+<h3>导入扩展功能模块</h3>
+
+<p>你可以将扩展包解压后，把 <code>notifications/</code>, <code>excel_utils/</code>, <code>ai_feedback/</code> 文件夹放入项目根目录，并在需要的地方引入。</p>
+
+<script>
+// 简单的语法高亮模拟
+document.addEventListener('DOMContentLoaded', function() {
+    const pres = document.querySelectorAll('pre code');
+    pres.forEach((block) => {
+        const text = block.textContent;
+        // 简单关键词替换模拟高亮
+        let html = text
+            .replace(/(sudo|apt|install|npm|run|cd|python|manage\.py|from|import|def|class|return)/g, '<span class="hljs-keyword">$1</span>')
+            .replace(/(CREATE|USER|DATABASE|WITH|PASSWORD|OWNER|INSERT|INTO|VALUES)/g, '<span class="hljs-keyword">$1</span>')
+            .replace(/(".*?"|'.*?')/g, '<span class="hljs-string">$1</span>')
+            .replace(/(\d+)/g, '<span class="hljs-number">$1</span>')
+            .replace(/(#.*)/g, '<span class="hljs-comment">$1</span>')
+            .replace(/(PORT|DB_HOST|DB_PORT|DB_NAME|DB_USER|DB_PASS|JWT_SECRET)/g, '<span class="hljs-title">$1</span>')
+            .replace(/(\b[A-Z][A-Z0-9_]+\b)/g, '<span class="hljs-built_in">$1</span>');
+        block.innerHTML = html;
+    });
+});
+</script>
+
+</body>
+</html>
