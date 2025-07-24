@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>重庆行程 07.23~07.28</title>
+    <title>重庆行程 07.24~07.28</title>
     <style>
         :root {
             --primary: #4a6fa5;
@@ -15,10 +15,11 @@
             --morning: #e3f2fd;
             --afternoon: #fff8e1;
             --evening: #f3e5f5;
+            --attraction-card: #ffffff;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
-            line-height: 1.5;
+            line-height: 1.6;
             color: var(--text);
             background-color: #f5f7fa;
             padding: 12px;
@@ -31,131 +32,176 @@
         }
         .header h1 {
             color: var(--primary);
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 4px;
+            font-size: 1.8em;
         }
         .header .date {
             color: var(--text-light);
-            font-size: 0.9em;
+            font-size: 1em;
+            letter-spacing: 1px;
         }
-        .card {
+        .section-card {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 16px;
-            margin-bottom: 16px;
-            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            padding: 18px;
+            margin-bottom: 20px;
         }
-        .card-title {
+        .section-title {
             color: var(--primary);
-            font-weight: 500;
+            font-weight: 600;
             margin-top: 0;
-            margin-bottom: 12px;
-            font-size: 1.1em;
+            margin-bottom: 16px;
+            font-size: 1.2em;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 8px;
+        }
+        .day-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            padding: 0;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .day-title {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 18px;
+            margin: 0;
+            font-size: 1.2em;
         }
         .time-block {
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 12px;
-        }
-        .morning {
-            background-color: var(--morning);
-            border-left: 3px solid #64b5f6;
-        }
-        .afternoon {
-            background-color: var(--afternoon);
-            border-left: 3px solid #ffb74d;
-        }
-        .evening {
-            background-color: var(--evening);
-            border-left: 3px solid #ba68c8;
+            padding: 15px;
         }
         .time-label {
-            font-weight: 500;
-            margin-bottom: 8px;
+            font-weight: 600;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
+            font-size: 1.1em;
         }
         .time-label:before {
             content: "";
             display: inline-block;
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 10px;
         }
-        .morning .time-label:before {
+        .morning-block {
+            background-color: var(--morning);
+        }
+        .morning-block .time-label:before {
             background: #64b5f6;
         }
-        .afternoon .time-label:before {
+        .afternoon-block {
+            background-color: var(--afternoon);
+        }
+        .afternoon-block .time-label:before {
             background: #ffb74d;
         }
-        .evening .time-label:before {
+        .evening-block {
+            background-color: var(--evening);
+        }
+        .evening-block .time-label:before {
             background: #ba68c8;
         }
-        .item {
+        .attraction-card {
+            background: var(--attraction-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 3px solid var(--primary);
+        }
+        .attraction-name {
+            font-weight: 600;
+            margin-top: 0;
             margin-bottom: 8px;
-            padding-bottom: 8px;
-            border-bottom: 1px dashed var(--border);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
         }
-        .item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
+        .attraction-name .emoji {
+            margin-right: 8px;
+            font-size: 1.2em;
         }
-        .item-title {
-            font-weight: 500;
-            margin-bottom: 4px;
+        .attraction-detail {
+            margin-bottom: 6px;
+            display: flex;
         }
-        .item-detail {
+        .detail-label {
+            min-width: 60px;
             color: var(--text-light);
             font-size: 0.9em;
-            margin: 4px 0;
         }
-        .emoji {
-            margin-right: 4px;
+        .detail-content {
+            flex: 1;
+            font-size: 0.95em;
+        }
+        .transport-card {
+            background: #f0f7ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid var(--secondary);
+        }
+        .transport-title {
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        .transport-item {
+            margin-bottom: 8px;
+        }
+        .cost-summary {
+            background: #f5f9ff;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+        .cost-total {
+            font-weight: 600;
+            margin-top: 5px;
+            color: var(--primary);
         }
         .qr-container {
             display: flex;
             justify-content: space-around;
-            margin: 16px 0;
+            margin: 15px 0;
+            flex-wrap: wrap;
         }
         .qr-code {
             text-align: center;
-            padding: 8px;
+            padding: 10px;
         }
         .qr-code img {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 6px;
+            object-fit: cover;
         }
         .qr-label {
-            font-size: 0.8em;
+            font-size: 0.85em;
             color: var(--text-light);
-            margin-top: 4px;
+            margin-top: 5px;
         }
-        .cost {
-            background: var(--light);
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin-top: 12px;
-            font-size: 0.9em;
+        .emoji {
+            font-size: 1.1em;
+            margin-right: 5px;
         }
-        .cost-total {
-            font-weight: 500;
-            margin-top: 4px;
-        }
-        hr {
-            border: 0;
-            height: 1px;
-            background: var(--border);
-            margin: 20px 0;
-        }
-        @media (max-width: 400px) {
+        @media (max-width: 500px) {
             .qr-code img {
-                width: 100px;
-                height: 100px;
+                width: 120px;
+                height: 120px;
+            }
+            .day-title {
+                font-size: 1.1em;
             }
         }
     </style>
@@ -163,352 +209,372 @@
 <body>
     <div class="header">
         <h1>重庆行程安排</h1>
-        <div class="date">07.23 ~ 07.28</div>
+        <div class="date">07.24 ~ 07.28</div>
     </div>
 
-    <div class="card">
-        <h3 class="card-title">大交通</h3>
-        <div class="item">
-            <div class="item-title">7.23 铜梁→重庆</div>
-            <div class="item-detail"><span class="emoji">🚕</span> 中午13:00打车前往璧铜线庆隆站</div>
-            <div class="item-detail"><span class="emoji">🚇</span> 地铁前往酒店</div>
-        </div>
-        <div class="item">
-            <div class="item-detail">航班信息：MU5432 15:20 重庆江北T3</div>
-        </div>
-        <div class="item">
-            <div class="item-detail">酒店 → 机场：地铁 50min；打车 23km 25min</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3 class="card-title">住宿</h3>
-        <div class="item">
-            <div class="item-title">7/23~7/24</div>
-            <div class="item-detail">米可电竞酒店(重庆龙湖时代天街石油路地铁站店)</div>
-            <div class="item-detail">地铁 1#石油路站</div>
-        </div>
-        <div class="item">
-            <div class="item-title">7/24~7/26</div>
-            <div class="item-detail">花筑·星悦荟江景酒店(重庆观音桥步行街店)</div>
-            <div class="item-detail">地铁 10#、9#鲤鱼池站</div>
-        </div>
-        <div class="item">
-            <div class="item-title">7/26~7/28</div>
-            <div class="item-detail">七点见·视野酒店(重庆沙坪坝高铁站三峡广场店)</div>
-            <div class="item-detail">地铁1#、9#、环线沙坪坝站</div>
+    <div class="section-card">
+        <h3 class="section-title">大交通</h3>
+        <div class="attraction-card">
+            <div class="attraction-detail">
+                <div class="detail-label">7.23</div>
+                <div class="detail-content">铜梁 → 重庆市区：璧铜公交转地铁，约 2h</div>
+            </div>
+            <div class="attraction-detail">
+                <div class="detail-label">航班</div>
+                <div class="detail-content">MU5432 15:20 重庆江北T3</div>
+            </div>
+            <div class="attraction-detail">
+                <div class="detail-label">机场</div>
+                <div class="detail-content">酒店 → 机场：地铁 50min；打车 23km 25min</div>
+            </div>
         </div>
     </div>
 
-    <!-- Day 0 -->
-    <div class="card">
-        <h3 class="card-title">Day 0：7月23日（周二）抵达重庆</h3>
-        
-        <div class="time-block afternoon">
-            <div class="time-label">下午</div>
-            <div class="item">
-                <div class="item-title">前往酒店</div>
-                <div class="item-detail"><span class="emoji">🚕</span> 13:00左右打车前往璧铜线庆隆站</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁前往米可电竞酒店</div>
+    <div class="section-card">
+        <h3 class="section-title">住宿</h3>
+        <div class="attraction-card">
+            <div class="attraction-detail">
+                <div class="detail-label">7/23-7/24</div>
+                <div class="detail-content">米可电竞酒店(重庆龙湖时代天街石油路地铁站店) 地铁1#石油路站</div>
             </div>
-        </div>
-        
-        <div class="time-block evening">
-            <div class="time-label">晚上</div>
-            <div class="item-detail">自由活动，适应环境</div>
+            <div class="attraction-detail">
+                <div class="detail-label">7/24-7/26</div>
+                <div class="detail-content">花筑·星悦荟江景酒店(重庆观音桥步行街店) 地铁10#、9#鲤鱼池站</div>
+            </div>
+            <div class="attraction-detail">
+                <div class="detail-label">7/26-7/28</div>
+                <div class="detail-content">七点见·视野酒店(重庆沙坪坝高铁站三峡广场店) 地铁1#、9#、环线沙坪坝站</div>
+            </div>
         </div>
     </div>
-
-<!-- 修改后的Day 1部分 -->
-<div class="card">
-    <h3 class="card-title">Day 1：7月24日（周三）换酒店+解放碑核心区+夜景</h3>
-    
-    <div class="time-block morning">
-        <div class="time-label">上午</div>
-        <div class="item">
-            <div class="item-title">从米可电竞酒店退房</div>
-            <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线石油路→两路口换3号线→观音桥站</div>
-            <div class="item-detail">💰 4元 | ⏰ 25分钟</div>
-        </div>
-        <div class="item">
-            <div class="item-title">入住花筑酒店</div>
-            <div class="item-detail">存放行李后出发</div>
-        </div>
-    </div>
-    
-    <div class="time-block afternoon">
-        <div class="time-label">下午</div>
-        <div class="item">
-            <div class="item-title">前往解放碑</div>
-            <div class="item-detail"><span class="emoji">🚇</span> 地铁10号线鲤鱼池→红土地换6号线→小什字站</div>
-            <div class="item-detail">💰 4元 | ⏰ 25分钟</div>
-        </div>
-<div class="item">
-                <div class="item-title">解放碑→长江索道</div>
-                <div class="item-detail"><span class="emoji">🚶</span> 步行10分钟</div>
-            </div>
-            <div class="item">
-                <div class="item-title">长江索道体验</div>
-                <div class="item-detail">单程票 <strong>20元</strong></div>
-            </div>
-        </div>
-        
-        <div class="time-block evening">
-            <div class="time-label">晚上</div>
-            <div class="item">
-                <div class="item-title">洪崖洞夜景</div>
-                <div class="item-detail"><span class="emoji">🚶</span> 索道北站出，步行15分钟至洪崖洞11楼</div>
-            </div>
-            <div class="item">
-                <div class="item-title">千厮门大桥观景</div>
-                <div class="item-detail"><span class="emoji">🚶</span> 洪崖洞1楼出，步行5分钟至桥下</div>
-            </div>
-            <div class="item">
-                <div class="item-title">返回酒店</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线小什字→两路口换3号线→观音桥站</div>
-                <div class="item-detail">💰 4元 | ⏰ 35分钟</div>
-            </div>
-        </div>
-        
-        <div class="cost">
-            <div>交通：3元 + 4元 = 7元</div>
-            <div>门票：长江索道单程 20元</div>
-            <div class="cost-total">当日总花费：27元/人</div>
-        </div>
-    </div>
-
-<!-- 更新后的费用计算 -->
-<div class="cost">
-    <div>交通：4元(换酒店) + 4元(去) + 4元(回) = <strong>12元</strong></div>
-    <div>门票：长江索道单程 20元</div>
-    <div class="cost-total">当日总花费：32元/人</div>
-</div>
 
     <!-- Day 1 -->
-    <div class="card">
-        <h3 class="card-title">Day 1：7月24日（周三）解放碑核心区+夜景</h3>
+    <div class="day-card">
+        <h3 class="day-title">Day 1：7月24日（周三）【渝中半岛核心】</h3>
         
-        <div class="time-block afternoon">
-            <div class="time-label">下午</div>
-            <div class="item">
-                <div class="item-title">前往解放碑</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线石油路→小什字站</div>
-                <div class="item-detail">💰 3元 | ⏰ 20分钟</div>
+        <div class="time-block afternoon-block">
+            <div class="time-label">🌞 下午</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🏙️</span> 解放碑</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">渝中区民权路</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚇交通</div>
+                    <div class="detail-content">地铁10号线鲤鱼池→小什字站（9号口），换乘1号线1站 💰4元</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">⏰建议</div>
+                    <div class="detail-content">14:00-15:30（打卡地标+八一好吃街）</div>
+                </div>
             </div>
-            <div class="item">
-                <div class="item-title">解放碑→长江索道</div>
-                <div class="item-detail"><span class="emoji">🚶</span> 步行10分钟</div>
-            </div>
-            <div class="item">
-                <div class="item-title">长江索道体验</div>
-                <div class="item-detail">单程票 <strong>20元</strong></div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🚠</span> 长江索道（北站）</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">解放碑新华路</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚶交通</div>
+                    <div class="detail-content">解放碑步行10分钟</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">💰费用</div>
+                    <div class="detail-content">单程票 💰20元（高考生凭证优惠）</div>
+                </div>
             </div>
         </div>
         
-        <div class="time-block evening">
-            <div class="time-label">晚上</div>
-            <div class="item">
-                <div class="item-title">洪崖洞夜景</div>
-                <div class="item-detail"><span class="emoji">🚶</span> 索道北站出，步行15分钟至洪崖洞11楼</div>
-            </div>
-            <div class="item">
-                <div class="item-title">千厮门大桥观景</div>
-                <div class="item-detail"><span class="emoji">🚶</span> 洪崖洞1楼出，步行5分钟至桥下</div>
-            </div>
-            <div class="item">
-                <div class="item-title">返回酒店</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线小什字→两路口换3号线→观音桥站</div>
-                <div class="item-detail">💰 4元 | ⏰ 35分钟</div>
+        <div class="time-block evening-block">
+            <div class="time-label">🌙 晚上</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🌉</span> 洪崖洞+千厮门大桥</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">嘉陵江滨江路</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚶交通</div>
+                    <div class="detail-content">索道站步行15分钟至洪崖洞11楼 → 1楼步行至桥下</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">📸夜景</div>
+                    <div class="detail-content">19:30-22:00（亮灯后超美！）</div>
+                </div>
             </div>
         </div>
         
-        <div class="cost">
-            <div>交通：3元 + 4元 = 7元</div>
-            <div>门票：长江索道单程 20元</div>
-            <div class="cost-total">当日总花费：27元/人</div>
+        <div class="transport-card">
+            <h4 class="transport-title">🚌 交通闭环</h4>
+            <div class="transport-item">酒店→解放碑：地铁 💰4元</div>
+            <div class="transport-item">返程：洪崖洞→小什字站→鲤鱼池 💰4元</div>
+            <div class="cost-summary">
+                <div>📝 当日总花费：交通💰8元 + 门票💰20元</div>
+            </div>
         </div>
     </div>
 
     <!-- Day 2 -->
-    <div class="card">
-        <h3 class="card-title">Day 2：7月25日（周四）历史人文+心跳乐园</h3>
+    <div class="day-card">
+        <h3 class="day-title">Day 2：7月25日（周四）【城市文化日】</h3>
         
-        <div class="time-block morning">
-            <div class="time-label">上午</div>
-            <div class="item">
-                <div class="item-title">酒店→三峡博物馆</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁10号线鲤鱼池→红土地换6号线→小什字换1号线→曾家岩站</div>
-                <div class="item-detail">💰 5元 | ⏰ 35分钟</div>
-            </div>
-            <div class="item">
-                <div class="item-title">三峡博物馆参观</div>
-                <div class="item-detail">建议参观时间：2小时</div>
-            </div>
-            <div class="item">
-                <div class="item-title">人民大礼堂</div>
-                <div class="item-detail"><span class="emoji">🚶</span> 步行5分钟</div>
-            </div>
-        </div>
-        
-        <div class="time-block afternoon">
-            <div class="time-label">下午</div>
-            <div class="item">
-                <div class="item-title">前往心跳顽家</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁10号线大礼堂站→红土地换6号线→大竹林站</div>
-                <div class="item-detail"><span class="emoji">🚕</span> 打车至乐园（5公里）</div>
-                <div class="item-detail">💰 地铁5元 + 打车5元 | ⏰ 40分钟</div>
-            </div>
-            <div class="item">
-                <div class="item-title">心跳顽家乐园</div>
-                <div class="item-detail">高考生票 <strong>98元</strong></div>
-            </div>
+        <div class="time-block morning-block">
+            <div class="time-label">🌞 上午</div>
             
-            <!-- QR Codes -->
-            <div class="qr-container">
-                <div class="qr-code">
-                    <img src="qr.png" alt="心跳顽家门票二维码1">
-                    <div class="qr-label">心跳顽家门票二维码1</div>
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🏛️</span> 三峡博物馆</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">渝中区人民路236号</div>
                 </div>
-                <div class="qr-code">
-                    <img src="qr2.png" alt="心跳顽家门票二维码2">
-                    <div class="qr-label">心跳顽家门票二维码2</div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚇交通</div>
+                    <div class="detail-content">地铁10号线鲤鱼池→曾家岩站（3号口直达） 💰3元</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">⏰时间</div>
+                    <div class="detail-content">9:00-11:00（免费需预约）</div>
                 </div>
             </div>
             
-            <div class="item">
-                <div class="item-title">返回酒店</div>
-                <div class="item-detail"><span class="emoji">🚕</span> 打车返回（15公里）</div>
-                <div class="item-detail">💰 打车18元 | ⏰ 30分钟</div>
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🏟️</span> 人民大礼堂</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">博物馆对面</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚶交通</div>
+                    <div class="detail-content">步行3分钟</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">💰可选</div>
+                    <div class="detail-content">门票💰8元（入内参观）</div>
+                </div>
             </div>
         </div>
         
-        <div class="cost">
-            <div>交通：5元 + 5元 + 18元 = 28元</div>
-            <div>门票：心跳顽家高考生票 98元</div>
-            <div class="cost-total">当日总花费：126元/人</div>
+        <div class="time-block afternoon-block">
+            <div class="time-label">🌇 下午</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🗺️</span> 重庆市规划展览馆</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">渝北区恒明路1号</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚇交通</div>
+                    <div class="detail-content">地铁10号线曾家岩→幸福广场站（2号口） 💰3元 →步行15分钟</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">⏰时间</div>
+                    <div class="detail-content">13:00-15:30（沉浸式城市沙盘超震撼！）</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="transport-card">
+            <h4 class="transport-title">🚌 交通闭环</h4>
+            <div class="transport-item">全程地铁：去程💰3元 + 转场💰3元 + 返程💰3元</div>
+            <div class="cost-summary">
+                <div>📝 当日总花费：交通💰9元 + 可选门票💰8元</div>
+            </div>
         </div>
     </div>
 
     <!-- Day 3 -->
-    <div class="card">
-        <h3 class="card-title">Day 3：7月26日（周五）换酒店+白公馆+欢乐谷</h3>
+    <div class="day-card">
+        <h3 class="day-title">Day 3：7月26日（周五）【红色历史+古镇夜色】</h3>
         
-        <div class="time-block morning">
-            <div class="time-label">上午</div>
-            <div class="item">
-                <div class="item-title">退房及换酒店</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁9号线鲤鱼池→沙坪坝站</div>
-                <div class="item-detail">💰 4元 | ⏰ 30分钟</div>
-            </div>
-            <div class="item">
-                <div class="item-title">前往白公馆</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线沙坪坝→烈士墓站</div>
-                <div class="item-detail"><span class="emoji">🚌</span> 景区接驳车至白公馆</div>
-                <div class="item-detail">💰 地铁2元 + 接驳车5元 | ⏰ 25分钟</div>
-            </div>
-            <div class="item">
-                <div class="item-title">白公馆/渣滓洞参观</div>
-                <div class="item-detail">建议参观时间：2小时</div>
+        <div class="time-block morning-block">
+            <div class="time-label">🌞 上午</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🔄</span> 换酒店</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">🏨旧店</div>
+                    <div class="detail-content">鲤鱼池</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🏨新店</div>
+                    <div class="detail-content">沙坪坝</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚇交通</div>
+                    <div class="detail-content">地铁9号线鲤鱼池→沙坪坝站（直达） 💰4元</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">⏰建议</div>
+                    <div class="detail-content">10:00前完成</div>
+                </div>
             </div>
         </div>
         
-        <div class="time-block afternoon">
-            <div class="time-label">下午</div>
-            <div class="item">
-                <div class="item-title">前往欢乐谷</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线烈士墓→沙坪坝换环线→冉家坝换6号线→礼嘉站</div>
-                <div class="item-detail"><span class="emoji">🚕</span> 打车至欢乐谷（3公里）</div>
-                <div class="item-detail">💰 地铁6元 + 打车5元 | ⏰ 45分钟</div>
-            </div>
-            <div class="item">
-                <div class="item-title">欢乐谷游玩</div>
-                <div class="item-detail">含在2日票（已购）</div>
-            </div>
-        </div>
-        
-        <div class="time-block evening">
-            <div class="time-label">晚上</div>
-            <div class="item">
-                <div class="item-title">夜游磁器口</div>
-                <div class="item-detail"><span class="emoji">🚕</span> 打车至轨道欢乐谷站→地铁1号线至磁器口站</div>
-                <div class="item-detail">💰 打车5元 + 地铁3元 | ⏰ 25分钟</div>
-            </div>
-            <div class="item">
-                <div class="item-title">返回酒店</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线磁器口→沙坪坝站（1站）</div>
-                <div class="item-detail">💰 2元 | ⏰ 5分钟</div>
+        <div class="time-block afternoon-block">
+            <div class="time-label">🌇 下午</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">⚫</span> 白公馆+渣滓洞</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">歌乐山</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚇交通</div>
+                    <div class="detail-content">地铁1号线沙坪坝→烈士墓站 💰2元 →换乘景区接驳车T198 💰20元/日票</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">⏰联游</div>
+                    <div class="detail-content">14:00-17:00（建议先参观渣滓洞）</div>
+                </div>
             </div>
         </div>
         
-        <div class="cost">
-            <div>交通：4元 + 7元 + 11元 + 5元 + 2元 = 29元</div>
-            <div>门票：欢乐谷含在2日票（已购）</div>
-            <div class="cost-total">当日总花费：29元/人</div>
+        <div class="time-block evening-block">
+            <div class="time-label">🌙 晚上</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🏮</span> 磁器口夜游</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">沙坪坝磁南街</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚌交通</div>
+                    <div class="detail-content">T198返程至磁器口站（免费）→步行入古镇</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🍢必吃</div>
+                    <div class="detail-content">陈麻花、毛血旺</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="transport-card">
+            <h4 class="transport-title">🚌 交通闭环</h4>
+            <div class="transport-item">换宿💰4元 + 景区交通💰22元（地铁2元+接驳车20元）</div>
+            <div class="cost-summary">
+                <div>📝 当日总花费：交通💰26元</div>
+            </div>
         </div>
     </div>
 
     <!-- Day 4 -->
-    <div class="card">
-        <h3 class="card-title">Day 4：7月27日（周六）玛雅水公园</h3>
+    <div class="day-card">
+        <h3 class="day-title">Day 4：7月27日（周六）【极限挑战日】</h3>
         
-        <div class="time-block morning">
-            <div class="time-label">上午</div>
-            <div class="item-detail">自由活动/休息</div>
-        </div>
-        
-        <div class="time-block afternoon">
-            <div class="time-label">下午</div>
-            <div class="item">
-                <div class="item-title">前往玛雅海滩</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线沙坪坝→两路口换3号线→红旗河沟换6号线→礼嘉站</div>
-                <div class="item-detail"><span class="emoji">🚕</span> 打车至玛雅（3公里）</div>
-                <div class="item-detail">💰 地铁6元 + 打车5元 | ⏰ 50分钟</div>
+        <div class="time-block morning-block">
+            <div class="time-label">🌞 全天</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🤸</span> 心跳顽家乐园</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">渝北区金开大道爱琴海L4</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚇交通</div>
+                    <div class="detail-content">地铁1号线沙坪坝→金渝站（3号线换乘） 💰5元 →步行10分钟</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">⏰时段</div>
+                    <div class="detail-content">10:00-18:00（含午休）</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">💰门票</div>
+                    <div class="detail-content">高考生特惠 💰98元（需预约）</div>
+                </div>
+                
+                <!-- QR Codes -->
+                <div class="qr-container">
+                    <div class="qr-code">
+                        <img src="qr.png" alt="心跳顽家门票二维码1">
+                        <div class="qr-label">心跳顽家门票二维码1</div>
+                    </div>
+                    <div class="qr-code">
+                        <img src="qr2.png" alt="心跳顽家门票二维码2">
+                        <div class="qr-label">心跳顽家门票二维码2</div>
+                    </div>
+                </div>
             </div>
-            <div class="item">
-                <div class="item-title">玛雅水公园游玩</div>
-                <div class="item-detail">含在2日票（已购）</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🛍️</span> 万象汇休闲</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">同商场内</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚶交通</div>
+                    <div class="detail-content">乐园内步行直达</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🎬可选</div>
+                    <div class="detail-content">商场内影院观影</div>
+                </div>
             </div>
         </div>
         
-        <div class="time-block evening">
-            <div class="time-label">晚上</div>
-            <div class="item-detail">自由活动/休息</div>
-        </div>
-        
-        <div class="cost">
-            <div>交通：11元（去）+ 11元（回）= 22元</div>
-            <div>门票：玛雅含2日票（已购）</div>
-            <div class="cost-total">当日总花费：22元/人</div>
+        <div class="transport-card">
+            <h4 class="transport-title">🚌 交通闭环</h4>
+            <div class="transport-item">往返地铁：💰5元（去）+💰5元（回）</div>
+            <div class="cost-summary">
+                <div>📝 当日总花费：交通💰10元 + 门票💰98元</div>
+            </div>
         </div>
     </div>
 
     <!-- Day 5 -->
-    <div class="card">
-        <h3 class="card-title">Day 5：7月28日（周日）返程</h3>
+    <div class="day-card">
+        <h3 class="day-title">Day 5：7月28日（周日）【红色记忆+返程】</h3>
         
-        <div class="time-block morning">
-            <div class="time-label">上午</div>
-            <div class="item">
-                <div class="item-title">红岩革命纪念馆</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线沙坪坝→烈士墓站</div>
-                <div class="item-detail"><span class="emoji">🚶</span> 步行15分钟（或打车起步价10元）</div>
-                <div class="item-detail">💰 地铁2元 + 打车5元 | ⏰ 20分钟</div>
+        <div class="time-block morning-block">
+            <div class="time-label">🌞 上午</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">🔴</span> 红岩革命纪念馆</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">📍位置</div>
+                    <div class="detail-content">沙坪坝烈士墓</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚇交通</div>
+                    <div class="detail-content">地铁1号线沙坪坝→烈士墓站 💰2元 →步行15分钟</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">⏰时段</div>
+                    <div class="detail-content">9:00-11:00（免费需预约）</div>
+                </div>
             </div>
         </div>
         
-        <div class="time-block afternoon">
-            <div class="time-label">中午</div>
-            <div class="item">
-                <div class="item-title">退房及前往机场</div>
-                <div class="item-detail"><span class="emoji">🚇</span> 地铁1号线沙坪坝→两路口换3号线→江北机场T2航站楼</div>
-                <div class="item-detail">💰 7元 | ⏰ 65分钟</div>
+        <div class="time-block afternoon-block">
+            <div class="time-label">🌇 中午</div>
+            
+            <div class="attraction-card">
+                <h4 class="attraction-name"><span class="emoji">✈️</span> 退房→机场</h4>
+                <div class="attraction-detail">
+                    <div class="detail-label">🚇交通</div>
+                    <div class="detail-content">烈士墓站→地铁1号线至两路口→换3号线至江北机场T2 💰7元</div>
+                </div>
+                <div class="attraction-detail">
+                    <div class="detail-label">⏰建议</div>
+                    <div class="detail-content">13:00前出发（航班15:20）</div>
+                </div>
             </div>
         </div>
         
-        <div class="cost">
-            <div>交通：7元 + 7元 = 14元</div>
-            <div>门票：红岩博物馆免费（需预约）</div>
-            <div class="cost-total">当日总花费：14元/人</div>
+        <div class="transport-card">
+            <h4 class="transport-title">🚌 交通闭环</h4>
+            <div class="transport-item">去程💰2元 + 机场线💰7元</div>
+            <div class="cost-summary">
+                <div>📝 当日总花费：交通💰9元</div>
+            </div>
         </div>
     </div>
 </body>
